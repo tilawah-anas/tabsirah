@@ -1,11 +1,1 @@
 @import "tailwindcss";
-
-@font-face {
-  font-family: 'Roboto';
-  src: url(/fonts/Roboto-VariableFont_wdth\,wght.ttf);
-}
-
-@font-face {
-  font-family: 'A Suls-Regular';
-  src: url(/fonts/A\ Suls-Regular.ttf);
-}
