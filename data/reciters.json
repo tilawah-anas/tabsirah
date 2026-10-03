@@ -1,0 +1,51 @@
+{
+  "sudais": {
+    "name": "Sheikh Abdulrahman Sudais",
+    "nameAr": "عبد الرحمن السديس",
+    "surahs": {
+      "1": "",
+      "2": ""
+    }
+  },
+  "al-emadi": {
+    "name": "Sheikh Anas Al Emadi",
+    "nameAr": "أنس العمادي",
+    "surahs": {
+      "1": "",
+      "2": "",
+      "3": "https://archive.org/download/complete-quran-anas-al-emadi/003.mp3"
+    }
+  },
+  "al-turki": {
+    "name": "Sheikh Badr Al Turki",
+    "nameAr": "بدر التركي",
+    "surahs": {
+      "1": "",
+      "2": ""
+    }
+  },
+  "bukhatir": {
+    "name": "Sheikh Salah Bukhatir",
+    "nameAr": "صلاح بوخاطر",
+    "surahs": {
+      "1": "",
+      "2": ""
+    }
+  },
+  "al-muaiqly": {
+    "name": "Sheikh Maher Al Muaiqly",
+    "nameAr": "ماهر المعيقلي",
+    "surahs": {
+      "1": "",
+      "2": ""
+    }
+  },
+  "al-utaybi": {
+    "name": "Sheikh Salman Al Utaybi",
+    "nameAr": "سلمان العتيبي",
+    "surahs": {
+      "1": "",
+      "2": ""
+    }
+  }
+}
