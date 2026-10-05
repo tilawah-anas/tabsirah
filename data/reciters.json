@@ -1,12 +1,14 @@
 {
   "sudais": {
     "name": "Sheikh Abdulrahman Sudais",
-    "nameAr": "عبد الرحمن السديس",
+    "nameAr": "عبدالرحمن السديس",
+    "image": "../audio/images/sudais.png",
     "surahs": {
       "1": "",
       "2": ""
     }
   },
+
   "al-emadi": {
     "name": "Sheikh Anas Al Emadi",
     "nameAr": "أنس العمادي",
@@ -17,34 +19,41 @@
       "3": ""
     }
   },
-  "al-turki": {
-    "name": "Sheikh Badr Al Turki",
-    "nameAr": "بدر التركي",
-    "surahs": {
-      "1": "",
-      "2": ""
-    }
-  },
+
   "bukhatir": {
     "name": "Sheikh Salah Bukhatir",
     "nameAr": "صلاح بوخاطر",
-    "image": "../audio/images/salah.jpg",
+    "image": "../audio/images/salah.png",
     "surahs": {
       "1": "https://archive.org/download/QuranSalahBukhatir128Kbps/%5BQuran%5D%20Salah%20Bukhatir%20%5B128Kbps%5D/001.mp3",
-      "2": ""
+      "2": "https://archive.org/download/QuranSalahBukhatir128Kbps/%5BQuran%5D%20Salah%20Bukhatir%20%5B128Kbps%5D/003.mp3"
     }
   },
-  "al-muaiqly": {
-    "name": "Sheikh Maher Al Muaiqly",
-    "nameAr": "ماهر المعيقلي",
+
+  "al-turki": {
+    "name": "Sheikh Badr Al Turki",
+    "nameAr": "بدر التركي",
+    "image": "../audio/images/badr.png",
     "surahs": {
       "1": "",
       "2": ""
     }
   },
+
+  "al-muaiqly": {
+    "name": "Sheikh Maher Al Muaiqly",
+    "nameAr": "ماهر المعيقلي",
+    "image": "../audio/images/maher.png",
+    "surahs": {
+      "1": "",
+      "2": ""
+    }
+  },
+  
   "al-utaybi": {
     "name": "Sheikh Salman Al Utaybi",
     "nameAr": "سلمان العتيبي",
+    "image": "../audio/images/salman.png",
     "surahs": {
       "1": "",
       "2": ""
