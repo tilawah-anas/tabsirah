@@ -56,7 +56,7 @@ async function renderReciterPage() {
 
   const slug = new URLSearchParams(window.location.search).get("name");
   if (!slug) {
-    window.location.href = "/audio/";
+    window.location.href = "./";
     return;
   }
 
