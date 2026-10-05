@@ -5,14 +5,14 @@ let surahsCache = null;
 // ─── Loaders ───
 async function loadReciters() {
   if (recitersCache) return recitersCache;
-  const res = await fetch("/data/reciters.json");
+  const res = await fetch("../data/reciters.json");
   recitersCache = await res.json();
   return recitersCache;
 }
 
 async function loadSurahs() {
   if (surahsCache) return surahsCache;
-  const res = await fetch("/data/surahs.json");
+  const res = await fetch("../data/surahs.json");
   surahsCache = await res.json();
   return surahsCache;
 }
