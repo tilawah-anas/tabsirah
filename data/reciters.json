@@ -28,8 +28,9 @@
   "bukhatir": {
     "name": "Sheikh Salah Bukhatir",
     "nameAr": "صلاح بوخاطر",
+    "image": "../audio/images/salah.jpg",
     "surahs": {
-      "1": "",
+      "1": "https://archive.org/download/QuranSalahBukhatir128Kbps/%5BQuran%5D%20Salah%20Bukhatir%20%5B128Kbps%5D/001.mp3",
       "2": ""
     }
   },
