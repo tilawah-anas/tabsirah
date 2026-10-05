@@ -34,7 +34,7 @@ async function renderReciterList() {
   list.innerHTML = entries
     .map(
       ([slug, r]) => `
-    <a href="/audio/reciter.html?name=${slug}"
+    <a href="../audio/reciter.html?name=${slug}"
       class="flex min-h-28 bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition">
       <div class="w-28 md:w-32 bg-gray-100 shrink-0">
         <img src="${r.image || "/assets/reciters/default.jpg"}" class="w-full h-full object-cover" alt="${r.name}">
