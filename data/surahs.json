@@ -1,0 +1,19 @@
+{
+  "1":  { 
+    "name": "Surah Al Fatihah",
+    "nameAr": "سورة الفاتحة",
+    "ayahs": 7 
+  },
+
+  "2":  { 
+    "name": "Surah Al Baqarah",
+    "nameAr": "سورة البقرة",
+    "ayahs": 286
+  },
+
+  "3":  { 
+    "name": "Surah Ali Imran",
+    "nameAr": "سورة آل عمران",
+    "ayahs": 200
+  }
+}

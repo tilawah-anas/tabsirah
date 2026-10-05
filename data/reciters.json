@@ -10,10 +10,11 @@
   "al-emadi": {
     "name": "Sheikh Anas Al Emadi",
     "nameAr": "أنس العمادي",
+    "image": "../audio/images/anas.png",
     "surahs": {
-      "1": "",
+      "1": "https://archive.org/download/anas-alemadi-ramadan-1446_202607/001.MP3",
       "2": "",
-      "3": "https://archive.org/download/complete-quran-anas-al-emadi/003.mp3"
+      "3": ""
     }
   },
   "al-turki": {
