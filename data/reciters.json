@@ -5,7 +5,10 @@
     "image": "../audio/images/sudais.png",
     "surahs": {
       "1": "",
-      "2": ""
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": ""
     }
   },
 
@@ -15,8 +18,12 @@
     "image": "../audio/images/anas.png",
     "surahs": {
       "1": "https://archive.org/download/anas-alemadi-ramadan-1446_202607/001.MP3",
-      "2": "",
-      "3": ""
+      "2": "https://archive.org/download/complete-quran-anas-al-emadi/002.mp3",
+      "3": "https://archive.org/download/complete-quran-anas-al-emadi/003.mp3",
+      "4": "https://archive.org/download/complete-quran-anas-al-emadi/004.mp3",
+      "5": "https://archive.org/download/tabsirah_anasalemadi/005.MP3",
+      "6": "https://archive.org/download/complete-quran-anas-al-emadi/006.mp3",
+      "7": "https://archive.org/download/complete-quran-anas-al-emadi/007.mp3"
     }
   },
 
@@ -26,7 +33,10 @@
     "image": "../audio/images/salah.png",
     "surahs": {
       "1": "https://archive.org/download/QuranSalahBukhatir128Kbps/%5BQuran%5D%20Salah%20Bukhatir%20%5B128Kbps%5D/001.mp3",
-      "2": "https://archive.org/download/QuranSalahBukhatir128Kbps/%5BQuran%5D%20Salah%20Bukhatir%20%5B128Kbps%5D/003.mp3"
+      "2": "https://archive.org/download/QuranSalahBukhatir128Kbps/%5BQuran%5D%20Salah%20Bukhatir%20%5B128Kbps%5D/003.mp3",
+      "3": "",
+      "4": "",
+      "5": ""
     }
   },
 
@@ -36,7 +46,10 @@
     "image": "../audio/images/badr.png",
     "surahs": {
       "1": "",
-      "2": ""
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": ""
     }
   },
 
@@ -46,7 +59,10 @@
     "image": "../audio/images/maher.png",
     "surahs": {
       "1": "",
-      "2": ""
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": ""
     }
   },
   
@@ -56,7 +72,10 @@
     "image": "../audio/images/salman.png",
     "surahs": {
       "1": "",
-      "2": ""
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": ""
     }
   }
 }
