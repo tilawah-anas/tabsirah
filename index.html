@@ -9,7 +9,9 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
   />
-  <link rel="stylesheet" href="css/reader.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&display=swap" rel="stylesheet">
   <style type="text/tailwindcss">
     @font-face {
       font-family: "Roboto";
@@ -29,108 +31,522 @@
       --font-display: 'Roboto', serif;
       --font-surah: "Surah Name Ejazah";
     }
+
+    html[lang="ar"] body {
+      font-family: "Noto Naskh Arabic", 'Roboto', serif;
+    }
+
+    .pattern-islamic {
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%2280%22%20height=%2280%22%20viewBox=%220%200%2080%2080%22%3E%3Cg%20fill=%22none%22%20stroke=%22%23f9f7f1%22%20stroke-width=%221.2%22%3E%3Cpath%20d=%22M40%202%2078%2040%2040%2078%202%2040Z%22/%3E%3Crect%20x=%2214%22%20y=%2214%22%20width=%2252%22%20height=%2252%22/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 140px 140px;
+    }
   </style>
 </head>
 <body class="bg-primary font-display">
 
-  <header>
+ <header>
 
-    <nav class="flex justify-between items-center fixed left-0 top-0 right-0 backdrop-blur-md text-primary px-8 bg-secondary/95 w-full h-15 border-b-primary">
+  <nav class="flex justify-between items-center fixed z-10 left-0 top-0 right-0 backdrop-blur-xl backdrop-saturate-150 text-primary px-8 bg-secondary/70 w-full h-15 border-b border-primary/10 shadow-lg shadow-black/10">
 
-      <!-- NAV LEFT -->
-      <div class="flex flex-col items-center">
-        <img src="assets/logo-pri.png" class="w-16 md:w-20" alt="tasbirah logo">
-      </div>
+    <!-- NAV LEFT -->
+    <div class="flex flex-col items-center">
+      <img src="assets/logo-pri.png" class="w-16 md:w-20" alt="tasbirah logo">
+    </div>
 
-      <!-- NAV CENTER -->
-      <div class="hidden md:flex justify-between items-center gap-15">
-        <a href="/" data-nav="home" class="underline">
-          <i class="fa-solid fa-house"></i>
-          <span>Home</span>
-        </a>
-        <a href="/quran/" data-nav="quran" class="hover:underline">
-          <i class="fa-solid fa-book-quran"></i>
-          <span>Quran</span>
-        </a>
-        <a href="audio/audio.html" data-nav="audio" class="hover:underline">
-          <i class="fa-solid fa-headphones"></i>
-          <span>Audio</span>
-        </a>
-        <a href="todo.html" data-nav="todo" class="hover:underline">
-          <i class="fa-solid fa-list-check"></i>
-          <span>To-Do</span>
-        </a>
-        <a href="dhikr.html" data-nav="dhikr" class="hover:underline">
-          <i class="fa-solid fa-hands-praying"></i>
-          <span>Dhikr</span>
-        </a>
-      </div>
+    <!-- NAV CENTER -->
+    <div class="hidden md:flex justify-between items-center gap-15">
+      <a href="/" data-nav="home" class="underline">
+        <i class="fa-solid fa-house"></i>
+        <span data-i18n="nav.home">Home</span>
+      </a>
+      <a href="quran/quran.html" data-nav="quran" class="hover:underline">
+        <i class="fa-solid fa-book-quran"></i>
+        <span data-i18n="nav.quran">Quran</span>
+      </a>
+      <a href="audio/audio.html" data-nav="audio" class="hover:underline">
+        <i class="fa-solid fa-headphones"></i>
+        <span data-i18n="nav.audio">Audio</span>
+      </a>
+      <a href="todo.html" data-nav="todo" class="hover:underline">
+        <i class="fa-solid fa-list-check"></i>
+        <span data-i18n="nav.todo">To-Do</span>
+      </a>
+      <a href="dhikr.html" data-nav="dhikr" class="hover:underline">
+        <i class="fa-solid fa-hands-praying"></i>
+        <span data-i18n="nav.dhikr">Dhikr</span>
+      </a>
+    </div>
 
-      <!-- NAV RIGHT -->
-      <div class="flex items-center gap-1">
-        <button id="lang-toggle" class="flex justify-center items-center gap-1 w-14 h-8 rounded-full cursor-pointer hover:bg-hover-sec transition" aria-label="Switch language">
-          <span id="lang-label" class="">EN</span>
-          <i class="fa-solid fa-globe"></i>
-        </button>
+    <!-- NAV RIGHT -->
+    <div class="flex items-center gap-1">
+      <button id="lang-toggle" class="flex justify-center items-center gap-1 w-14 h-8 rounded-full cursor-pointer hover:bg-hover-sec transition" aria-label="Switch language">
+        <span id="lang-label" class="">EN</span>
+        <i class="fa-solid fa-globe"></i>
+      </button>
 
-        <!-- HAMBURGER MENU FOR MOBILE -->
-        <button id="menu-open" class="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-hover-sec transition md:hidden" aria-label="Open menu">
-          <i class="fa fa-bars"></i>
-        </button>
-      </div>
-      
+      <!-- HAMBURGER MENU FOR MOBILE -->
+      <button id="menu-open" class="flex justify-center items-center w-8 h-8 rounded-full cursor-pointer hover:bg-hover-sec transition md:hidden" aria-label="Open menu">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+
+  </nav>
+
+  <div id="menu-backdrop" class="hidden fixed inset-0 bg-black/50 z-40 md:hidden"></div>
+
+  <aside id="menu-sidebar" class="fixed top-0 end-0 h-full w-72 bg-primary shadow-xl z-50 translate-x-full rtl:-translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+
+    <!-- Header with close button -->
+    <div class="flex items-center justify-between h-15 px-5 border-b border-secondary">
+      <img src="assets/logo-sec.png" class="w-16 md:w-20" alt="tasbirah logo">
+      <button id="menu-close" class="text-xl text-secondary flex justify-center items-center w-10 h-10 rounded-full cursor-pointer hover:bg-hover-pri transition" aria-label="Close menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Links -->
+    <nav class="flex flex-col p-4 gap-1 text-secondary">
+
+      <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-hover-pri transition">
+        <i class="fa-solid fa-house"></i>
+        <span data-i18n="nav.home">Home</span>
+      </a>
+
+      <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-hover-pri transition">
+        <i class="fa-solid fa-book-quran"></i>
+        <span data-i18n="nav.quran">Quran</span>
+      </a>
+
+      <a href="audio/audio.html" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-hover-pri transition">
+        <i class="fa-solid fa-headphones"></i>
+        <span data-i18n="nav.audio">Audio</span>
+      </a>
+
+      <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-hover-pri transition">
+        <i class="fa-solid fa-list-check"></i>
+        <span data-i18n="nav.todo">To-Do</span>
+      </a>
+
+      <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-hover-pri transition">
+        <i class="fa-solid fa-hands-praying"></i>
+        <span data-i18n="nav.dhikr">Dhikr</span>
+      </a>
+
     </nav>
 
-    <div id="menu-backdrop" class="hidden fixed inset-0 bg-black/50 z-40 md:hidden"></div>
+  </aside>
 
-    <aside id="menu-sidebar" class="fixed top-0 end-0 h-full w-72 bg-primary shadow-xl z-50 translate-x-full rtl:-translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+</header>
 
-      <!-- Header with close button -->
-      <div class="flex items-center justify-between h-15 px-5 border-b border-secondary">
-        <img src="assets/logo-sec.png" class="w-16 md:w-20" alt="tasbirah logo">
-        <button id="menu-close" class="text-xl text-secondary flex justify-center items-center w-10 h-10 rounded-full cursor-pointer hover:bg-hover-pri transition" aria-label="Close menu">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+  <main class="mt-15">
+
+    <!-- hero section -->
+    <section class="relative overflow-hidden bg-secondary text-primary">
+
+      <div class="pattern-islamic pointer-events-none absolute inset-0 opacity-[0.07]"></div>
+      <div class="pointer-events-none absolute -top-40 -right-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl"></div>
+      <div class="pointer-events-none absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-primary/5 blur-3xl"></div>
+
+      <div class="relative mx-auto grid max-w-6xl items-center gap-14 px-6 py-16 md:grid-cols-2 md:px-8 md:py-24">
+
+        <!-- Hero copy -->
+        <div>
+          <span class="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.22em] text-amber-200">
+            <i class="fa-solid fa-star-and-crescent"></i>
+            <span data-i18n="hero.badge">Tabsirah</span>
+          </span>
+
+          <h1 class="mt-6 text-4xl font-bold leading-[1.15] md:text-6xl">
+            <span data-i18n="hero.titleBefore">Nourish your heart with the</span>
+            <span class="text-amber-300" data-i18n="hero.titleAccent">Qur'an</span>
+          </h1>
+
+          <p class="mt-6 max-w-lg text-base leading-relaxed text-primary/70 md:text-lg" data-i18n="hero.desc">
+            Recitations, the full mushaf, daily dhikr and worship routines — gathered in one calm,
+            distraction-free space. Read a verse, listen to a reciter, and let your day begin with remembrance.
+          </p>
+
+          <div class="mt-9 flex flex-wrap items-center gap-3">
+            <a href="quran/quran.html"
+               class="inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-secondary shadow-lg shadow-black/25 transition hover:bg-hover-pri">
+              <i class="fa-solid fa-book-quran"></i>
+              <span data-i18n="hero.ctaRead">Start Reading</span>
+            </a>
+            <a href="audio/audio.html"
+               class="inline-flex items-center gap-2 rounded-full border border-primary/25 px-7 py-3.5 text-sm font-semibold text-primary transition hover:border-primary/45 hover:bg-primary/10">
+              <i class="fa-solid fa-play text-xs"></i>
+              <span data-i18n="hero.ctaListen">Listen Now</span>
+            </a>
+          </div>
+
+          <!-- Mini stats -->
+          <div class="mt-10 flex flex-wrap items-center gap-x-10 gap-y-5 border-t border-primary/10 pt-7">
+            <div>
+              <p class="text-2xl font-bold text-amber-300">114</p>
+              <p class="mt-0.5 text-[11px] uppercase tracking-widest text-primary/50" data-i18n="hero.statSurahs">Surahs</p>
+            </div>
+            <div>
+              <p class="text-2xl font-bold text-amber-300">60+</p>
+              <p class="mt-0.5 text-[11px] uppercase tracking-widest text-primary/50" data-i18n="hero.statReciters">Reciters</p>
+            </div>
+            <div>
+              <p class="text-2xl font-bold text-amber-300">100%</p>
+              <p class="mt-0.5 text-[11px] uppercase tracking-widest text-primary/50" data-i18n="hero.statFree">Free</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arch card -->
+        <div class="relative mx-auto w-full max-w-sm">
+          <div class="rounded-t-[10rem] rounded-b-3xl border border-primary/15 bg-primary/[0.06] px-8 pb-10 pt-16 backdrop-blur-sm">
+
+            <div class="flex items-center justify-center gap-3 text-amber-300/70">
+              <span class="h-px w-8 bg-amber-300/40"></span>
+              <i class="fa-solid fa-star-and-crescent text-[10px]"></i>
+              <span class="h-px w-8 bg-amber-300/40"></span>
+            </div>
+
+            <p class="mt-5 text-center text-[11px] uppercase tracking-[0.3em] text-amber-200/80" data-i18n="hero.verseLabel">
+              Verse of the day
+            </p>
+
+            <p dir="rtl" class="mt-7 text-center text-3xl leading-[2.1] text-primary">
+              إِنَّ مَعَ الْعُسْرِ يُسْرًا
+            </p>
+
+            <p class="mt-6 text-center text-sm italic text-primary/65" data-i18n="hero.verseTranslation">
+              “Indeed, with hardship comes ease.”
+            </p>
+
+            <p class="mt-2 text-center text-xs text-primary/40" data-i18n="hero.verseRef">
+              Surah Ash-Sharh · 94:6
+            </p>
+          </div>
+
+          <div class="absolute -bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-full border border-primary/15 bg-secondary px-5 py-2.5 text-xs text-primary/80 shadow-lg shadow-black/30">
+            <i class="fa-solid fa-circle-play text-amber-300"></i>
+            <span data-i18n="hero.continue">Continue listening</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- features section -->
+    <section class="mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
+
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-amber-600" data-i18n="features.eyebrow">Everything in one place</p>
+        <h2 class="mt-3 text-3xl font-bold text-secondary md:text-4xl" data-i18n="features.title">Built for your daily worship</h2>
+        <p class="mt-4 leading-relaxed text-secondary/60" data-i18n="features.desc">
+          Simple tools that help you stay connected to the Book of Allah — whether you have five minutes
+          or a quiet afternoon.
+        </p>
       </div>
 
-      <!-- Links -->
-      <nav class="flex flex-col p-4 gap-1 text-secondary">
+      <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
-        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-hover-pri transition">
-          <i class="fa-solid fa-house"></i>
-          <span data-i18n="nav.home">Home</span>
+        <a href="quran/quran.html"
+           class="group flex flex-col rounded-2xl border border-secondary/10 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary/20 hover:shadow-xl">
+          <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-primary transition group-hover:bg-hover-sec">
+            <i class="fa-solid fa-book-quran text-lg"></i>
+          </span>
+          <h3 class="mt-5 text-lg font-semibold text-secondary" data-i18n="features.quran.title">Qur'an Reader</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-secondary/60" data-i18n="features.quran.desc">
+            Read all 114 surahs with clear Arabic text, translations and bookmarking.
+          </p>
+          <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-secondary/70 transition-all group-hover:gap-3 group-hover:text-secondary">
+            <span data-i18n="features.explore">Explore</span>
+            <i class="fa-solid fa-arrow-right text-xs rtl:rotate-180"></i>
+          </span>
         </a>
 
-        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-hover-pri transition">
-          <i class="fa-solid fa-book-quran"></i>
-          <span data-i18n="nav.quran">Quran</span>
+        <a href="audio/audio.html"
+           class="group flex flex-col rounded-2xl border border-secondary/10 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary/20 hover:shadow-xl">
+          <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-primary transition group-hover:bg-hover-sec">
+            <i class="fa-solid fa-headphones text-lg"></i>
+          </span>
+          <h3 class="mt-5 text-lg font-semibold text-secondary" data-i18n="features.audio.title">Recitations</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-secondary/60" data-i18n="features.audio.desc">
+            Stream beautiful recitations from renowned qurra around the world.
+          </p>
+          <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-secondary/70 transition-all group-hover:gap-3 group-hover:text-secondary">
+            <span data-i18n="features.listen">Listen</span>
+            <i class="fa-solid fa-arrow-right text-xs rtl:rotate-180"></i>
+          </span>
         </a>
 
-        <a href="audio/audio.html"class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-hover-pri transition">
-          <i class="fa-solid fa-headphones"></i>
-          <span data-i18n="nav.audio">Audio</span>
+        <a href="todo.html"
+           class="group flex flex-col rounded-2xl border border-secondary/10 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary/20 hover:shadow-xl">
+          <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-primary transition group-hover:bg-hover-sec">
+            <i class="fa-solid fa-list-check text-lg"></i>
+          </span>
+          <h3 class="mt-5 text-lg font-semibold text-secondary" data-i18n="features.todo.title">Worship To-Do</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-secondary/60" data-i18n="features.todo.desc">
+            Track your prayers, reading goals and daily acts of worship with ease.
+          </p>
+          <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-secondary/70 transition-all group-hover:gap-3 group-hover:text-secondary">
+            <span data-i18n="features.organise">Organise</span>
+            <i class="fa-solid fa-arrow-right text-xs rtl:rotate-180"></i>
+          </span>
         </a>
 
-        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-hover-pri transition">
-          <i class="fa-solid fa-list-check"></i>
-          <span data-i18n="nav.todo">To-Do</span>
+        <a href="dhikr.html"
+           class="group flex flex-col rounded-2xl border border-secondary/10 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-secondary/20 hover:shadow-xl">
+          <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-primary transition group-hover:bg-hover-sec">
+            <i class="fa-solid fa-hands-praying text-lg"></i>
+          </span>
+          <h3 class="mt-5 text-lg font-semibold text-secondary" data-i18n="features.dhikr.title">Dhikr Counter</h3>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-secondary/60" data-i18n="features.dhikr.desc">
+            Keep your tongue moist with remembrance using a simple, focused counter.
+          </p>
+          <span class="mt-5 inline-flex items-center gap-2 text-sm font-medium text-secondary/70 transition-all group-hover:gap-3 group-hover:text-secondary">
+            <span data-i18n="features.remember">Remember</span>
+            <i class="fa-solid fa-arrow-right text-xs rtl:rotate-180"></i>
+          </span>
         </a>
 
-        <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-hover-pri transition">
-          <i class="fa-solid fa-hands-praying"></i>
-          <span data-i18n="nav.dhikr">Dhikr</span>
-        </a>
+      </div>
+    </section>
 
-      </nav>
 
-    </aside>
-    
-  </header>
+    <!-- recitations -->
+    <section class="border-y border-secondary/10 bg-white/40">
+      <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 md:px-8 md:py-24 lg:grid-cols-[1fr_1.1fr]">
 
-  <main class="mt-15"></main>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-[0.25em] text-amber-600" data-i18n="recitations.eyebrow">Recitations</p>
+          <h2 class="mt-3 text-3xl font-bold leading-tight text-secondary md:text-4xl" data-i18n="recitations.title">
+            Listen to the world's most beloved reciters
+          </h2>
+          <p class="mt-5 leading-relaxed text-secondary/60" data-i18n="recitations.desc">
+            From the gentle pace of Al-Husary to the moving tones of Abdul Basit — choose a reciter,
+            press play, and let the words settle in your heart.
+          </p>
 
-  <!-- <footer class="bg-secondary w-full p-20"></footer> -->
-  
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <a href="audio/audio.html"
+               class="inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-semibold text-primary transition hover:bg-hover-sec">
+              <i class="fa-solid fa-headphones"></i>
+              <span data-i18n="recitations.browse">Browse all recitations</span>
+            </a>
+            <span class="text-sm text-secondary/50" data-i18n="recitations.noAccount">No account needed</span>
+          </div>
+        </div>
+
+        <!-- Reciter list -->
+        <div class="space-y-3">
+
+          <a href="audio/audio.html"
+             class="group flex items-center gap-4 rounded-2xl border border-secondary/10 bg-white p-4 shadow-sm transition hover:border-secondary/20 hover:shadow-lg">
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary/5 text-sm font-semibold text-secondary">MA</span>
+            <span class="min-w-0 flex-1">
+              <span class="block truncate font-semibold text-secondary" data-i18n="reciters.alafasy.name">Mishary Rashid Alafasy</span>
+              <span class="block text-xs text-secondary/50" data-i18n="reciters.alafasy.meta">Kuwait · 30 surahs</span>
+            </span>
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition group-hover:scale-105">
+              <i class="fa-solid fa-play text-xs"></i>
+            </span>
+          </a>
+
+          <a href="audio/audio.html"
+             class="group flex items-center gap-4 rounded-2xl border border-secondary/10 bg-white p-4 shadow-sm transition hover:border-secondary/20 hover:shadow-lg">
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary/5 text-sm font-semibold text-secondary">AB</span>
+            <span class="min-w-0 flex-1">
+              <span class="block truncate font-semibold text-secondary" data-i18n="reciters.basit.name">Abdul Basit Abdus Samad</span>
+              <span class="block text-xs text-secondary/50" data-i18n="reciters.basit.meta">Egypt · 25 surahs</span>
+            </span>
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition group-hover:scale-105">
+              <i class="fa-solid fa-play text-xs"></i>
+            </span>
+          </a>
+
+          <a href="audio/audio.html"
+             class="group flex items-center gap-4 rounded-2xl border border-secondary/10 bg-white p-4 shadow-sm transition hover:border-secondary/20 hover:shadow-lg">
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary/5 text-sm font-semibold text-secondary">MH</span>
+            <span class="min-w-0 flex-1">
+              <span class="block truncate font-semibold text-secondary" data-i18n="reciters.husary.name">Mahmoud Khalil Al-Husary</span>
+              <span class="block text-xs text-secondary/50" data-i18n="reciters.husary.meta">Egypt · 40 surahs</span>
+            </span>
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition group-hover:scale-105">
+              <i class="fa-solid fa-play text-xs"></i>
+            </span>
+          </a>
+
+          <a href="audio/audio.html"
+             class="group flex items-center gap-4 rounded-2xl border border-secondary/10 bg-white p-4 shadow-sm transition hover:border-secondary/20 hover:shadow-lg">
+            <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary/5 text-sm font-semibold text-secondary">SG</span>
+            <span class="min-w-0 flex-1">
+              <span class="block truncate font-semibold text-secondary" data-i18n="reciters.ghamdi.name">Saad Al-Ghamdi</span>
+              <span class="block text-xs text-secondary/50" data-i18n="reciters.ghamdi.meta">Saudi Arabia · 22 surahs</span>
+            </span>
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition group-hover:scale-105">
+              <i class="fa-solid fa-play text-xs"></i>
+            </span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- dhikr -->
+    <section class="relative overflow-hidden bg-secondary text-primary">
+      <div class="pattern-islamic pointer-events-none absolute inset-0 opacity-[0.06]"></div>
+      <div class="pointer-events-none absolute -top-32 left-1/3 h-80 w-80 rounded-full bg-primary/10 blur-3xl"></div>
+
+      <div class="relative mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
+
+        <div class="mx-auto max-w-2xl text-center">
+          <div class="flex items-center justify-center gap-3 text-amber-300/70">
+            <span class="h-px w-10 bg-amber-300/40"></span>
+            <i class="fa-solid fa-hands-praying text-xs"></i>
+            <span class="h-px w-10 bg-amber-300/40"></span>
+          </div>
+          <h2 class="mt-5 text-3xl font-bold md:text-4xl" data-i18n="dhikr.title">Remembrance that stays with you</h2>
+          <p class="mt-4 leading-relaxed text-primary/65" data-i18n="dhikr.desc">
+            Short, powerful words — counted simply, so nothing stands between you and your Lord.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 md:grid-cols-3">
+
+          <div class="rounded-2xl border border-primary/10 bg-primary/5 p-7 text-center backdrop-blur-sm transition hover:border-primary/25 hover:bg-primary/10">
+            <p dir="rtl" class="text-3xl leading-[2] text-amber-200">سُبْحَانَ اللَّهِ</p>
+            <p class="mt-4 text-sm text-primary/65" data-i18n="dhikr.subhanAllah">Glory be to Allah</p>
+            <p class="mt-5 text-[11px] uppercase tracking-[0.2em] text-primary/40" data-i18n="dhikr.count33">33× after each prayer</p>
+          </div>
+
+          <div class="rounded-2xl border border-primary/10 bg-primary/5 p-7 text-center backdrop-blur-sm transition hover:border-primary/25 hover:bg-primary/10">
+            <p dir="rtl" class="text-3xl leading-[2] text-amber-200">الْحَمْدُ لِلَّهِ</p>
+            <p class="mt-4 text-sm text-primary/65" data-i18n="dhikr.alhamdulillah">All praise is for Allah</p>
+            <p class="mt-5 text-[11px] uppercase tracking-[0.2em] text-primary/40" data-i18n="dhikr.count33">33× after each prayer</p>
+          </div>
+
+          <div class="rounded-2xl border border-primary/10 bg-primary/5 p-7 text-center backdrop-blur-sm transition hover:border-primary/25 hover:bg-primary/10">
+            <p dir="rtl" class="text-3xl leading-[2] text-amber-200">اللَّهُ أَكْبَرُ</p>
+            <p class="mt-4 text-sm text-primary/65" data-i18n="dhikr.allahuAkbar">Allah is the Greatest</p>
+            <p class="mt-5 text-[11px] uppercase tracking-[0.2em] text-primary/40" data-i18n="dhikr.count34">34× after each prayer</p>
+          </div>
+
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href="dhikr.html"
+             class="inline-flex items-center gap-2 rounded-full border border-primary/25 px-7 py-3.5 text-sm font-semibold text-primary transition hover:border-primary/45 hover:bg-primary/10">
+            <i class="fa-solid fa-circle-plus text-xs"></i>
+            <span data-i18n="dhikr.open">Open the Dhikr counter</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- cta -->
+    <section class="mx-auto max-w-6xl px-6 py-16 md:px-8 md:py-24">
+      <div class="relative overflow-hidden rounded-3xl border border-secondary/10 bg-white px-8 py-14 text-center shadow-sm md:px-16">
+
+        <div class="flex items-center justify-center gap-3 text-amber-500">
+          <span class="h-px w-10 bg-amber-500/40"></span>
+          <i class="fa-solid fa-star-and-crescent text-xs"></i>
+          <span class="h-px w-10 bg-amber-500/40"></span>
+        </div>
+
+        <h2 class="mx-auto mt-6 max-w-xl text-3xl font-bold leading-tight text-secondary md:text-4xl" data-i18n="cta.title">
+          Begin your journey today
+        </h2>
+
+        <p class="mx-auto mt-4 max-w-xl leading-relaxed text-secondary/60" data-i18n="cta.desc">
+          Set a goal, pick a reciter, and let Tabsirah walk with you through every page and every prayer.
+        </p>
+
+        <div class="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <a href="quran/quran.html"
+             class="inline-flex items-center gap-2 rounded-full bg-secondary px-7 py-3.5 text-sm font-semibold text-primary transition hover:bg-hover-sec">
+            <i class="fa-solid fa-book-open"></i>
+            <span data-i18n="cta.openQuran">Open the Qur'an</span>
+          </a>
+          <a href="todo.html"
+             class="inline-flex items-center gap-2 rounded-full border border-secondary/20 px-7 py-3.5 text-sm font-semibold text-secondary transition hover:border-secondary/40 hover:bg-hover-pri">
+            <i class="fa-solid fa-list-check"></i>
+            <span data-i18n="cta.setGoal">Set a daily goal</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-secondary w-full px-6 py-16 md:p-20">
+    <div class="mx-auto max-w-6xl text-primary">
+
+      <div class="grid gap-12 md:grid-cols-4">
+
+        <div class="md:col-span-2">
+          <img src="assets/logo-pri.png" class="w-20" alt="tasbirah logo">
+          <p class="mt-6 max-w-sm text-sm leading-relaxed text-primary/60" data-i18n="footer.desc">
+            Tabsirah is a quiet, distraction-free space for the Qur'an, recitations and daily
+            remembrance — built to help you stay connected, one verse at a time.
+          </p>
+
+          <div class="mt-7 flex items-center gap-3">
+            <a href="#" aria-label="Facebook" class="flex h-10 w-10 items-center justify-center rounded-full border border-primary/15 text-primary/70 transition hover:border-primary/35 hover:text-primary">
+              <i class="fa-brands fa-facebook-f text-sm"></i>
+            </a>
+            <a href="#" aria-label="X" class="flex h-10 w-10 items-center justify-center rounded-full border border-primary/15 text-primary/70 transition hover:border-primary/35 hover:text-primary">
+              <i class="fa-brands fa-x-twitter text-sm"></i>
+            </a>
+            <a href="#" aria-label="Instagram" class="flex h-10 w-10 items-center justify-center rounded-full border border-primary/15 text-primary/70 transition hover:border-primary/35 hover:text-primary">
+              <i class="fa-brands fa-instagram text-sm"></i>
+            </a>
+            <a href="#" aria-label="YouTube" class="flex h-10 w-10 items-center justify-center rounded-full border border-primary/15 text-primary/70 transition hover:border-primary/35 hover:text-primary">
+              <i class="fa-brands fa-youtube text-sm"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-amber-200/80" data-i18n="footer.explore">Explore</h3>
+          <ul class="mt-5 space-y-3 text-sm text-primary/60">
+            <li><a href="quran/quran.html" class="transition hover:text-primary" data-i18n="footer.linkQuran">Qur'an Reader</a></li>
+            <li><a href="audio/audio.html" class="transition hover:text-primary" data-i18n="footer.linkAudio">Recitations</a></li>
+            <li><a href="dhikr.html" class="transition hover:text-primary" data-i18n="footer.linkDhikr">Dhikr Counter</a></li>
+            <li><a href="todo.html" class="transition hover:text-primary" data-i18n="footer.linkTodo">Worship To-Do</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-[0.2em] text-amber-200/80" data-i18n="footer.about">About</h3>
+          <ul class="mt-5 space-y-3 text-sm text-primary/60">
+            <li><a href="#" class="transition hover:text-primary" data-i18n="footer.mission">Our mission</a></li>
+            <li><a href="#" class="transition hover:text-primary" data-i18n="footer.contact">Contact us</a></li>
+            <li><a href="#" class="transition hover:text-primary" data-i18n="footer.privacy">Privacy policy</a></li>
+            <li><a href="#" class="transition hover:text-primary" data-i18n="footer.terms">Terms of use</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="mt-14 flex flex-col items-center justify-between gap-4 border-t border-primary/10 pt-8 text-xs text-primary/50 sm:flex-row">
+        <p>&copy; <span id="copyright-year"></span> Tabsirah. <span data-i18n="footer.rights">All rights reserved.</span></p>
+        <p class="flex items-center gap-2">
+          <span data-i18n="footer.madeWith">Made with</span>
+          <i class="fa-solid fa-heart text-amber-400"></i>
+          <span data-i18n="footer.forUmmah">for the ummah</span>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+  </script>
+  <script src="js/i18n.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
